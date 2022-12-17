@@ -4,16 +4,13 @@ const generateDivs = function (num = 16) {
   for (let i = 1; i < num ** 2 + 1; i++) {
     const newDiv = document.createElement("div");
     newDiv.classList.add("item");
-    newDiv.style.width = `${Math.floor(640 / num)}px`;
+    newDiv.style.width = `${640 / num}px`;
     container.appendChild(newDiv);
   }
 };
 
 // generate 16*16 grid
-
 generateDivs();
-// Select all the divs we created
-const newItems = document.querySelectorAll(".item");
 
 // Borrowed this function from CSSTricks
 function RGBToHSL(r, g, b) {
@@ -64,7 +61,9 @@ const randomNums = function () {
 
   return { h, s, l };
 };
-
+// Add event listener for hovering to each div we just created
+// First time assign random color
+// Then each time reduce ligthening by five until its zero
 const colorize = function (e) {
   if (e.target.style.backgroundColor === "") {
     const { h, s, l } = randomNums();
@@ -82,9 +81,38 @@ const colorize = function (e) {
   }
 };
 
-// Add event listener for hovering to each div we just created
-// First time assign random color
-// Then each time reduce ligthening by five until its zero
-newItems.forEach((item) => {
-  item.addEventListener("mouseenter", colorize);
+const selectItems = () => {
+  const newItems = document.querySelectorAll(".item");
+  newItems.forEach((item) => {
+    item.addEventListener("mouseenter", colorize);
+  });
+  return newItems;
+};
+
+selectItems();
+
+const newGridBtn = document.querySelector("#new");
+
+// Removes all the divs inside container
+const removeDivs = function () {
+  const childCount = container.childElementCount;
+  for (let i = 1; i <= childCount; i++) {
+    const element = container.firstElementChild;
+    container.removeChild(element);
+  }
+};
+
+newGridBtn.addEventListener("click", () => {
+  const input = +prompt("Enter grid size...(max-100)");
+  if (isNaN(input) || input < 5) {
+    alert("Please enter a valid number(5-100)");
+    return;
+  } else if (input > 100) {
+    alert("Please enter a lower number than 100");
+    return;
+  } else {
+    removeDivs();
+    generateDivs(input);
+    selectItems();
+  }
 });
