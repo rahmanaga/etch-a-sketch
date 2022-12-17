@@ -1,12 +1,17 @@
 const container = document.querySelector(".container");
-// create 16*16 grid of square divs
-for (let i = 1; i < 257; i++) {
-  const newDiv = document.createElement("div");
-  newDiv.classList.add("item");
-  newDiv.style.width = "40px";
-  container.appendChild(newDiv);
-}
+// generate num*num grid of square divs in container
+const generateDivs = function (num = 16) {
+  for (let i = 1; i < num ** 2 + 1; i++) {
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("item");
+    newDiv.style.width = `${Math.floor(640 / num)}px`;
+    container.appendChild(newDiv);
+  }
+};
 
+// generate 16*16 grid
+
+generateDivs();
 // Select all the divs we created
 const newItems = document.querySelectorAll(".item");
 
