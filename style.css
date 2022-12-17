@@ -48,5 +48,6 @@ button:hover {
 }
 
 .item {
-  border: 1px solid blue;
+  border: 1px solid black;
+  flex: 1 1 auto;
 }
