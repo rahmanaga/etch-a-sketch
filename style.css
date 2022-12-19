@@ -53,3 +53,13 @@ button:hover {
   border: 1px solid black;
   flex: 1 1 auto;
 }
+
+@media (max-width: 1050px) {
+  .main {
+    flex-direction: column;
+    gap: 50px;
+  }
+  h1 {
+    margin-bottom: 0.8em;
+  }
+}
