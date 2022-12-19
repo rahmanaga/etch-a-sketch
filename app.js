@@ -92,6 +92,7 @@ const selectItems = () => {
 selectItems();
 
 const newGridBtn = document.querySelector("#new");
+const clearBtn = document.querySelector("#clear");
 
 // Removes all the divs inside container
 const removeDivs = function () {
@@ -99,6 +100,14 @@ const removeDivs = function () {
   for (let i = 1; i <= childCount; i++) {
     const element = container.firstElementChild;
     container.removeChild(element);
+  }
+};
+// Remove the background color of all the divs inside the container
+const clearDivs = function () {
+  const children = container.children;
+  for (let i = 0; i < children.length; i++) {
+    const element = children[i];
+    element.style.backgroundColor = "";
   }
 };
 
@@ -116,3 +125,5 @@ newGridBtn.addEventListener("click", () => {
     selectItems();
   }
 });
+
+clearBtn.addEventListener("click", clearDivs);
